@@ -1,0 +1,262 @@
+@import "tailwindcss";
+@import "@fontsource/playfair-display/400.css";
+@import "@fontsource/playfair-display/500.css";
+@import "@fontsource/playfair-display/600.css";
+@import "@fontsource/playfair-display/700.css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+
+:root {
+  /* Brand Colors */
+  --bottle-green: #0F2A1D;
+  --rich-ivory: #F7F1E5;
+  --champagne-gold: #C8A96A;
+  --walnut-brown: #4A3326;
+  --charcoal: #171717;
+  --soft-parchment: #EFE3D0;
+  --muted-sage: #9AAB89;
+  --oxblood: #5A1F24;
+
+  /* Semantic */
+  --bg-primary: var(--rich-ivory);
+  --bg-dark: var(--bottle-green);
+  --text-primary: var(--charcoal);
+  --text-muted: var(--walnut-brown);
+  --accent: var(--champagne-gold);
+  --border-accent: var(--champagne-gold);
+
+  /* Fonts */
+  --font-serif: "Playfair Display", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Manrope", "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--rich-ivory);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* Gold divider */
+.gold-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--champagne-gold);
+}
+
+/* Parchment texture overlay */
+.parchment-bg {
+  background-color: var(--soft-parchment);
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(200, 169, 106, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(15, 42, 29, 0.04) 0%, transparent 50%);
+}
+
+/* Dark green section */
+.dark-green-section {
+  background: var(--bottle-green);
+  background-image:
+    radial-gradient(ellipse at 10% 90%, rgba(200, 169, 106, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 90% 10%, rgba(154, 171, 137, 0.06) 0%, transparent 50%);
+}
+
+/* Gold border card */
+.gold-card {
+  border: 1px solid rgba(200, 169, 106, 0.3);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.gold-card-dark {
+  border: 1px solid rgba(200, 169, 106, 0.2);
+  background: rgba(15, 42, 29, 0.5);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--champagne-gold);
+  color: var(--bottle-green);
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: #B8924A;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 30px rgba(200, 169, 106, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--champagne-gold);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  border: 1px solid rgba(200, 169, 106, 0.6);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  background: rgba(200, 169, 106, 0.1);
+  border-color: var(--champagne-gold);
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--bottle-green);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.75rem 1.75rem;
+  border-radius: 2px;
+  border: 1px solid rgba(15, 42, 29, 0.4);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-outline-dark:hover {
+  background: rgba(15, 42, 29, 0.08);
+}
+
+/* Section spacing */
+.section-pad {
+  padding: 5rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-pad {
+    padding: 3.5rem 0;
+  }
+}
+
+/* Typography helpers */
+.serif-heading {
+  font-family: var(--font-serif);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Gradient text */
+.gold-text {
+  color: var(--champagne-gold);
+}
+
+/* Fancy HR */
+.fancy-hr {
+  border: none;
+  border-top: 1px solid rgba(200, 169, 106, 0.25);
+  margin: 2rem 0;
+}
+
+/* WhatsApp bubble animation */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+}
+
+.whatsapp-pulse {
+  animation: pulse-green 2.5s infinite;
+}
+
+/* Scroll fade-in */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+/* Input styles */
+.form-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(74, 51, 38, 0.2);
+  border-radius: 2px;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--charcoal);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--champagne-gold);
+  box-shadow: 0 0 0 3px rgba(200, 169, 106, 0.12);
+}
+
+.form-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--walnut-brown);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+/* Tag / chip */
+.specialty-tag {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border: 1px solid rgba(200, 169, 106, 0.4);
+  border-radius: 2px;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+  color: var(--walnut-brown);
+}
+
+/* Premium shadow */
+.premium-shadow {
+  box-shadow: 0 4px 40px rgba(15, 42, 29, 0.08), 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Noise overlay for sections */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Cureomax",
+  "short_name": "Cureomax",
+  "description": "AI Growth Systems for Healthcare Trust",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0D1B2A",
+  "theme_color": "#0D1B2A",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ]
+}

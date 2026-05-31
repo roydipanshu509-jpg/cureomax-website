@@ -1,90 +1,96 @@
-import type { Metadata } from "next";
+"use client";
 import Link from "next/link";
-import { Activity, CheckCircle, TrendingUp, Bell, FileText, BarChart3 } from "lucide-react";
+import { CheckCircle, ArrowRight, Activity, TrendingUp, Bell, BarChart3, FileText, AlertTriangle } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Physio & Ortho Clinics — AI Follow-up and Clinic CRM",
-  description: "Cureomax helps physiotherapy and orthopedic clinics reduce patient drop-offs, track pain recovery, automate session reminders, and bring patients back for the next visit.",
-};
 
 const useCases = [
-  { title: "Lower Back Pain", desc: "Track pain scores from day 1, automate session reminders, check recovery progress at day 3 and 7." },
-  { title: "Knee Pain Rehab", desc: "Session package tracking, exercise reminders, pain score timeline, revisit nudges after discharge." },
-  { title: "Shoulder Pain Recovery", desc: "Send mobility exercise reminders, track patient attendance across sessions, flag drop-offs." },
-  { title: "Post-Surgery Physiotherapy", desc: "Structured follow-up at Day 3, Week 1, Week 2, Week 4. Milestone tracking, report upload reminders." },
-  { title: "Sports Injury Recovery", desc: "Phase-wise recovery tracking, RTP (return to play) milestone reminders, exercise protocol follow-up." },
-  { title: "Office Worker Posture Care", desc: "Chronic pain patients need long-term follow-up. Automated check-ins prevent drop-offs." },
+  { icon: "🦴", title: "Lower Back Pain Rehab", desc: "Track pain scores from day 1, automate 3-day check-ins, send session reminders, and flag patients who stop responding mid-course." },
+  { icon: "🦵", title: "Knee Pain & Replacement", desc: "Session package tracking with utilisation alerts. Pain score timeline across pre-op, surgery, and post-op phases." },
+  { icon: "💪", title: "Shoulder Pain Recovery", desc: "Mobility exercise reminders, attendance tracking across sessions, drop-off flags when a patient misses two sessions in a row." },
+  { icon: "🏥", title: "Post-Surgery Physiotherapy", desc: "Structured follow-up at Day 3, Week 1, Week 2, Week 4. Milestone check-ins, report upload reminders, and GP communication drafts." },
+  { icon: "⚽", title: "Sports Injury Recovery", desc: "Phase-wise recovery tracking, return-to-play milestone reminders, exercise protocol follow-up, and athlete-specific session notes." },
+  { icon: "💻", title: "Office Worker Posture & Pain", desc: "Long-term chronic pain patients need consistent follow-up. Automated check-ins prevent drop-offs without burdening reception staff." },
 ];
 
-const recoveryTimeline = [
-  { day: "Day 1", action: "Patient visits for lower back pain. Pain score recorded: 8/10. Treatment begins.", type: "visit" },
-  { day: "Day 1 — 2 PM", action: "Cureomax sends: 'Thank you for visiting. Here are your home exercises for tonight.'", type: "reminder" },
-  { day: "Day 3", action: "Cureomax sends: 'Hi Rohan, how is your back today? Reply with your pain score (1–10).'", type: "check" },
-  { day: "Day 3 — 8 PM", action: "Rohan replies: '5'. Pain score updated to 5/10. Progress noted.", type: "data" },
-  { day: "Day 5", action: "Cureomax sends: 'Your next physio session is Day 6 at 5 PM. Reply YES to confirm.'", type: "reminder" },
-  { day: "Day 7", action: "Second session. Doctor notes improvement. Pain score: 4/10. Two more sessions scheduled.", type: "visit" },
-  { day: "Day 14", action: "Course complete. Pain score: 2/10. Discharge note drafted by AI — reviewed by doctor.", type: "complete" },
+const timeline = [
+  { day: "Day 1", type: "visit", text: "Rohan visits for lower back pain. Pain score 8/10 recorded. Treatment plan: 8 physio sessions over 3 weeks. AI drafts visit note — doctor approves." },
+  { day: "Day 1 — 6 PM", type: "reminder", text: "Cureomax sends: 'Hi Rohan, here are your home exercises for tonight. 10 minutes each — morning and evening. Take your medication on time.'" },
+  { day: "Day 3", type: "check", text: "Automated check-in: 'How is your back today? Reply with your pain score (1–10).' Rohan replies: 5. Score updated. Progress logged." },
+  { day: "Day 5 — 9 AM", type: "reminder", text: "Session reminder: 'Your next physio session is tomorrow at 11 AM. Reply YES to confirm.' Rohan confirms." },
+  { day: "Day 7", type: "visit", text: "Second session. Pain score: 4/10. Doctor notes improvement. Two more sessions scheduled. AI drafts progress note — doctor approves." },
+  { day: "Day 12", type: "reminder", text: "Cureomax flags: 'Rohan Sharma has not booked his 5th session — due this week.' Receptionist calls. Session booked." },
+  { day: "Day 21", type: "complete", text: "Course complete. Pain score: 1/10. Discharge note drafted by AI — reviewed and approved by doctor. Follow-up check sent in 30 days." },
 ];
 
-const analyticsCards = [
+const metrics = [
   { label: "Active Physio Patients", value: "34", note: "11 with sessions this week" },
   { label: "Avg Pain Score Drop", value: "4.2 pts", note: "Over a 2-week course" },
-  { label: "Session Package Utilisation", value: "88%", note: "Up from 71% last month" },
-  { label: "Patients Lost Mid-Course", value: "3", note: "Down from 9 last month" },
-  { label: "Follow-up Completion Rate", value: "82%", note: "Automated reminders working" },
+  { label: "Session Utilisation", value: "88%", note: "Up from 71% last month" },
+  { label: "Mid-Course Drop-offs", value: "3", note: "Down from 9 last month" },
+  { label: "Follow-up Completion", value: "82%", note: "Automated system running" },
   { label: "Revenue — Physio", value: "₹84,000", note: "This month" },
 ];
 
+const typeColors: Record<string, string> = {
+  visit: "#C8A45D", reminder: "#0A7075", check: "#0A7075", complete: "#A8B8A1",
+};
+
 export default function PhysioOrthoPage() {
   return (
-    <div style={{ paddingTop: "68px" }}>
+    <div style={{ paddingTop: 68 }}>
+
       {/* Hero */}
-      <section style={{ background: "#0F2A1D", padding: "5rem 1.5rem", backgroundImage: "radial-gradient(ellipse at 20% 60%, rgba(200,169,106,0.08) 0%, transparent 55%)" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+      <section style={{ background: "var(--navy-deep)", backgroundImage: "radial-gradient(ellipse at 15% 70%, rgba(10,112,117,0.15) 0%, transparent 55%)", padding: "5.5rem 1.5rem" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.5rem" }}>
-            <Activity size={18} color="#9AAB89" />
-            <span style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#9AAB89", fontFamily: "var(--font-body)" }}>Physiotherapy & Orthopedics</span>
+            <Activity size={16} color="#0E8E94" />
+            <span style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#0E8E94", fontFamily: "var(--sans)" }}>Physiotherapy &amp; Orthopedics</span>
           </div>
-          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2.2rem, 4.5vw, 3.5rem)", fontWeight: 600, color: "#F7F1E5", lineHeight: 1.12, maxWidth: "760px", marginBottom: "1.5rem" }}>
+          <h1 style={{ fontFamily: "var(--serif)", fontSize: "clamp(2.4rem, 4.5vw, 3.8rem)", fontWeight: 600, color: "#FAFAF8", lineHeight: 1.1, maxWidth: 780, marginBottom: "1.5rem" }}>
             AI Follow-up and Clinic CRM for Physio &amp; Ortho Clinics
           </h1>
-          <p style={{ color: "rgba(247,241,229,0.7)", fontSize: "1.1rem", lineHeight: 1.75, maxWidth: "580px", marginBottom: "2.5rem", fontFamily: "var(--font-body)" }}>
-            Reduce patient drop-offs, track pain recovery, automate session reminders, and bring patients back for the next visit.
+          <p style={{ color: "var(--white-70)", fontSize: "1.1rem", lineHeight: 1.8, maxWidth: 580, marginBottom: "2.5rem", fontFamily: "var(--sans)" }}>
+            Reduce patient drop-offs, track pain recovery automatically, automate session reminders, and bring patients back for every visit — without adding to your receptionist's workload.
           </p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Link href="/book-demo" className="btn-primary">Book a Demo →</Link>
-            <Link href="/demo" className="btn-outline">View Demo Story</Link>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
+            <Link href="/book-demo" className="btn-gold">Book a Physio Clinic Demo <ArrowRight size={15} /></Link>
+            <Link href="/demo" className="btn-outline-gold">See Patient Journey Demo</Link>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+            {["Physiotherapy", "Orthopedics", "Sports Medicine", "Post-Surgery Rehab", "Chronic Pain"].map((s) => (
+              <span key={s} className="specialty-tag">{s}</span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Problem Statement */}
-      <section style={{ background: "#F7F1E5", padding: "5rem 1.5rem" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "center" }}>
+      {/* Problem stat section */}
+      <section style={{ background: "#0A1220", padding: "4rem 1.5rem", borderTop: "1px solid rgba(200,164,93,0.07)" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
           <div>
-            <p style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#C8A96A", marginBottom: "1rem", fontFamily: "var(--font-body)" }}>The Physio Problem</p>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#0F2A1D", lineHeight: 1.2, marginBottom: "1.5rem" }}>
+            <p className="eyebrow" style={{ marginBottom: "1rem" }}>The Physio Problem</p>
+            <h2 style={{ fontFamily: "var(--serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#FAFAF8", lineHeight: 1.15, marginBottom: "1.25rem" }}>
               Physio patients drop out mid-course. And clinics never know why.
             </h2>
-            <p style={{ color: "#4A3326", fontSize: "0.95rem", lineHeight: 1.75, fontFamily: "var(--font-body)", marginBottom: "1.25rem" }}>
-              A patient comes for lower back pain. Pain is 8/10. You book them for 8 sessions. They complete 3 — then stop returning. Their pain improved a little, they got busy, they forgot. Your revenue is lost, their recovery is incomplete.
+            <p style={{ color: "var(--white-70)", fontSize: "0.95rem", lineHeight: 1.8, fontFamily: "var(--sans)", marginBottom: "1.25rem" }}>
+              A patient visits for lower back pain. Pain score is 8/10. You book them for 8 sessions. They complete 3 — then stop responding. Their pain improved a little, they got busy, they forgot. Your revenue is lost. Their recovery is incomplete.
             </p>
-            <p style={{ color: "#4A3326", fontSize: "0.95rem", lineHeight: 1.75, fontFamily: "var(--font-body)" }}>
+            <p style={{ color: "var(--white-50)", fontSize: "0.95rem", lineHeight: 1.8, fontFamily: "var(--sans)" }}>
               Cureomax tracks every patient, automates the follow-ups, and shows you who is at risk of dropping out — before they do.
             </p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
               { icon: "📉", title: "Average drop-off rate", stat: "35–45%", desc: "Patients who start physio treatment but don't complete the course" },
-              { icon: "💬", title: "Missed follow-up cost", stat: "₹3,000–₹8,000", desc: "Estimated per patient lost mid-treatment, across sessions and prescriptions" },
-              { icon: "📅", title: "No-show rate", stat: "15–22%", desc: "Appointments booked but not attended without any prior notice" },
-            ].map((stat) => (
-              <div key={stat.title} style={{ background: "white", border: "1px solid rgba(200,169,106,0.2)", borderRadius: "3px", padding: "1.25rem 1.5rem", display: "flex", gap: "1rem", alignItems: "center" }}>
-                <span style={{ fontSize: "1.5rem" }}>{stat.icon}</span>
+              { icon: "💬", title: "Revenue lost per drop-off", stat: "₹3,000–₹8,000", desc: "Across unfinished sessions, packages, and follow-up consultations" },
+              { icon: "📅", title: "No-show rate without reminders", stat: "15–22%", desc: "Appointments booked but not attended — most are preventable" },
+            ].map((s) => (
+              <div key={s.title} style={{ background: "var(--navy-mid)", border: "1px solid rgba(200,164,93,0.1)", borderRadius: 6, padding: "1.25rem 1.5rem", display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+                <span style={{ fontSize: "1.4rem" }}>{s.icon}</span>
                 <div>
-                  <p style={{ fontFamily: "var(--font-serif)", fontSize: "1.4rem", fontWeight: 600, color: "#5A1F24" }}>{stat.stat}</p>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "0.8rem", fontWeight: 600, color: "#0F2A1D" }}>{stat.title}</p>
-                  <p style={{ fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "#4A3326", lineHeight: 1.5 }}>{stat.desc}</p>
+                  <p style={{ fontFamily: "var(--serif)", fontSize: "1.6rem", fontWeight: 600, color: "#C8A45D", lineHeight: 1 }}>{s.stat}</p>
+                  <p style={{ fontFamily: "var(--sans)", fontSize: "0.8rem", fontWeight: 600, color: "#FAFAF8", margin: "0.3rem 0 0.2rem" }}>{s.title}</p>
+                  <p style={{ fontFamily: "var(--sans)", fontSize: "0.78rem", color: "var(--white-50)", lineHeight: 1.5 }}>{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -92,71 +98,123 @@ export default function PhysioOrthoPage() {
         </div>
       </section>
 
-      {/* Recovery Timeline Demo */}
-      <section style={{ background: "#0F2A1D", padding: "5rem 1.5rem" }}>
-        <div style={{ maxWidth: "900px", margin: "0 auto" }}>
-          <p style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#C8A96A", marginBottom: "1rem", fontFamily: "var(--font-body)" }}>Patient Journey Example</p>
-          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#F7F1E5", marginBottom: "0.75rem" }}>Rohan Sharma — Lower back pain</h2>
-          <p style={{ color: "rgba(247,241,229,0.6)", fontSize: "0.95rem", fontFamily: "var(--font-body)", marginBottom: "3rem" }}>Pain score 8/10 on Day 1. See how Cureomax manages his full 14-day recovery journey automatically.</p>
+      {/* Patient Recovery Timeline */}
+      <section style={{ background: "var(--navy)", padding: "5.5rem 1.5rem" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+          <p className="eyebrow" style={{ marginBottom: "1rem" }}>Patient Journey</p>
+          <h2 style={{ fontFamily: "var(--serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#FAFAF8", marginBottom: "0.75rem" }}>
+            Rohan Sharma — Lower back pain
+          </h2>
+          <p style={{ color: "var(--white-50)", fontSize: "0.95rem", fontFamily: "var(--sans)", marginBottom: "3rem" }}>
+            Pain score 8/10 on Day 1. See how Cureomax manages his full 21-day recovery journey automatically — without a single manual follow-up call.
+          </p>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
-            {recoveryTimeline.map((item, i) => {
-              const typeColors: Record<string, string> = { visit: "#C8A96A", reminder: "#9AAB89", check: "#9AAB89", data: "#C8A96A", complete: "#9AAB89" };
-              return (
-                <div key={i} style={{ display: "flex", gap: "1.25rem", paddingBottom: i < recoveryTimeline.length - 1 ? "1.5rem" : 0, borderLeft: i < recoveryTimeline.length - 1 ? "2px solid rgba(200,169,106,0.2)" : "2px solid transparent", marginLeft: "16px", paddingLeft: "1.75rem", position: "relative" }}>
-                  <div style={{ position: "absolute", left: "-9px", top: "2px", width: "16px", height: "16px", borderRadius: "50%", background: typeColors[item.type], flexShrink: 0 }} />
-                  <div>
-                    <p style={{ color: "#C8A96A", fontSize: "0.72rem", fontWeight: 700, fontFamily: "var(--font-body)", letterSpacing: "0.06em", marginBottom: "0.2rem" }}>{item.day}</p>
-                    <p style={{ color: "rgba(247,241,229,0.75)", fontSize: "0.88rem", lineHeight: 1.6, fontFamily: "var(--font-body)" }}>{item.action}</p>
-                  </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {timeline.map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  display: "flex", gap: "1.5rem",
+                  paddingBottom: i < timeline.length - 1 ? "1.75rem" : 0,
+                  borderLeft: i < timeline.length - 1 ? "2px solid rgba(200,164,93,0.15)" : "2px solid transparent",
+                  marginLeft: "20px", paddingLeft: "2rem",
+                  position: "relative",
+                }}
+              >
+                <div
+                  style={{
+                    position: "absolute", left: "-10px", top: 0,
+                    width: 18, height: 18, borderRadius: "50%",
+                    background: typeColors[item.type],
+                    flexShrink: 0,
+                    boxShadow: `0 0 8px ${typeColors[item.type]}44`,
+                  }}
+                />
+                <div style={{ paddingTop: "0.1rem" }}>
+                  <p style={{ color: typeColors[item.type], fontSize: "0.72rem", fontWeight: 700, fontFamily: "var(--sans)", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "0.3rem" }}>{item.day}</p>
+                  <p style={{ color: "var(--white-70)", fontSize: "0.9rem", lineHeight: 1.65, fontFamily: "var(--sans)" }}>{item.text}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
+          </div>
+
+          <div style={{ marginTop: "2.5rem", padding: "1.25rem 1.5rem", background: "rgba(10,112,117,0.1)", border: "1px solid rgba(10,112,117,0.2)", borderRadius: 4 }}>
+            <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-start" }}>
+              <CheckCircle size={14} color="#0A7075" style={{ flexShrink: 0, marginTop: 2 }} />
+              <p style={{ color: "var(--white-70)", fontSize: "0.85rem", lineHeight: 1.65, fontFamily: "var(--sans)" }}>
+                Every automated message above was sent by Cureomax without manual intervention. Doctor-approved visit notes only. Zero staff burden.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Use Cases */}
-      <section style={{ background: "#EFE3D0", padding: "5rem 1.5rem" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <p style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#C8A96A", marginBottom: "1rem", fontFamily: "var(--font-body)" }}>Use Cases</p>
-          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#0F2A1D", marginBottom: "3rem" }}>Built for how physio clinics actually work</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.25rem" }}>
+      <section style={{ background: "#0A1220", padding: "5.5rem 1.5rem" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <p className="eyebrow" style={{ marginBottom: "1rem" }}>Treatment Categories</p>
+          <h2 style={{ fontFamily: "var(--serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#FAFAF8", marginBottom: "3rem" }}>
+            Built for how physio clinics actually work
+          </h2>
+          <div className="grid-3" style={{ gap: "1.25rem" }}>
             {useCases.map((uc) => (
-              <div key={uc.title} style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(200,169,106,0.2)", borderRadius: "3px", padding: "1.75rem" }}>
-                <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "1.05rem", fontWeight: 600, color: "#0F2A1D", marginBottom: "0.5rem" }}>{uc.title}</h3>
-                <p style={{ color: "#4A3326", fontSize: "0.88rem", lineHeight: 1.65, fontFamily: "var(--font-body)" }}>{uc.desc}</p>
+              <div key={uc.title} style={{ background: "var(--navy-mid)", border: "1px solid rgba(200,164,93,0.1)", borderRadius: 6, padding: "1.75rem", transition: "border-color 0.2s" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "rgba(10,112,117,0.4)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.borderColor = "rgba(200,164,93,0.1)")}>
+                <div style={{ fontSize: "1.6rem", marginBottom: "0.875rem" }}>{uc.icon}</div>
+                <h3 style={{ fontFamily: "var(--serif)", fontSize: "1.05rem", fontWeight: 600, color: "#FAFAF8", marginBottom: "0.5rem" }}>{uc.title}</h3>
+                <p style={{ color: "var(--white-50)", fontSize: "0.87rem", lineHeight: 1.7, fontFamily: "var(--sans)" }}>{uc.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Analytics Preview */}
-      <section style={{ background: "#F7F1E5", padding: "5rem 1.5rem" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <p style={{ fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#C8A96A", marginBottom: "1rem", fontFamily: "var(--font-body)" }}>Clinic Dashboard</p>
-          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#0F2A1D", marginBottom: "3rem" }}>What your physio clinic dashboard looks like</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.25rem" }}>
-            {analyticsCards.map((a) => (
-              <div key={a.label} style={{ background: "white", border: "1px solid rgba(200,169,106,0.2)", borderRadius: "3px", padding: "1.5rem" }}>
-                <p style={{ fontSize: "0.72rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#9AAB89", fontFamily: "var(--font-body)", marginBottom: "0.5rem" }}>{a.label}</p>
-                <p style={{ fontFamily: "var(--font-serif)", fontSize: "2rem", fontWeight: 600, color: "#0F2A1D", marginBottom: "0.25rem" }}>{a.value}</p>
-                <p style={{ fontSize: "0.78rem", color: "#4A3326", fontFamily: "var(--font-body)" }}>{a.note}</p>
+      {/* Analytics Dashboard Preview */}
+      <section style={{ background: "var(--navy)", padding: "5.5rem 1.5rem" }}>
+        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+          <p className="eyebrow" style={{ marginBottom: "1rem" }}>Clinic Dashboard</p>
+          <h2 style={{ fontFamily: "var(--serif)", fontSize: "clamp(1.8rem, 3vw, 2.5rem)", fontWeight: 600, color: "#FAFAF8", marginBottom: "0.75rem" }}>
+            Your physio clinic numbers — finally visible.
+          </h2>
+          <p style={{ color: "var(--white-50)", fontSize: "0.95rem", fontFamily: "var(--sans)", marginBottom: "3rem", maxWidth: 560 }}>
+            Most physio clinic owners don't know their session utilisation rate, follow-up completion rate, or monthly recovery rate. Cureomax shows all of it — live.
+          </p>
+          <div className="grid-3" style={{ gap: "1.25rem" }}>
+            {metrics.map((m) => (
+              <div key={m.label} style={{ background: "var(--navy-mid)", border: "1px solid rgba(200,164,93,0.12)", borderRadius: 6, padding: "1.5rem" }}>
+                <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--trust-gray)", fontFamily: "var(--sans)", marginBottom: "0.5rem" }}>{m.label}</p>
+                <p style={{ fontFamily: "var(--serif)", fontSize: "2rem", fontWeight: 600, color: "#C8A45D", lineHeight: 1, marginBottom: "0.3rem" }}>{m.value}</p>
+                <p style={{ fontSize: "0.78rem", color: "var(--white-50)", fontFamily: "var(--sans)" }}>{m.note}</p>
               </div>
             ))}
+          </div>
+
+          <div style={{ marginTop: "2rem", display: "flex", gap: "0.5rem", alignItems: "flex-start", padding: "1.25rem 1.5rem", background: "rgba(158,59,50,0.06)", border: "1px solid rgba(158,59,50,0.15)", borderRadius: 4 }}>
+            <AlertTriangle size={14} color="rgba(196,112,106,0.8)" style={{ flexShrink: 0, marginTop: 2 }} />
+            <p style={{ color: "rgba(196,112,106,0.8)", fontSize: "0.83rem", lineHeight: 1.65, fontFamily: "var(--sans)" }}>
+              <strong style={{ color: "rgba(196,150,146,0.9)" }}>Medical Disclaimer: </strong>
+              Cureomax supports clinical workflows. All AI-generated visit notes, summaries, and follow-up content require doctor review and approval before use. Cureomax does not replace medical judgment or autonomous diagnosis.
+            </p>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section style={{ background: "#0F2A1D", padding: "5rem 1.5rem", textAlign: "center" }}>
-        <div style={{ maxWidth: "640px", margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 600, color: "#F7F1E5", marginBottom: "1rem" }}>Stop losing physio patients mid-course.</h2>
-          <p style={{ color: "rgba(247,241,229,0.6)", fontSize: "1rem", lineHeight: 1.7, marginBottom: "2rem", fontFamily: "var(--font-body)" }}>Book a 30-minute demo. We will show you exactly how Cureomax handles your clinic's follow-up workflow — built for physiotherapy and orthopedics.</p>
-          <Link href="/book-demo" className="btn-primary">Book a Demo for My Physio Clinic →</Link>
+      <section style={{ background: "var(--teal)", padding: "5.5rem 1.5rem", textAlign: "center" }}>
+        <div style={{ maxWidth: 640, margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "var(--serif)", fontSize: "clamp(2rem, 4vw, 2.8rem)", fontWeight: 600, color: "#FAFAF8", marginBottom: "1rem" }}>
+            Stop losing physio patients mid-course.
+          </h2>
+          <p style={{ color: "rgba(250,250,248,0.75)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "2.5rem", fontFamily: "var(--sans)" }}>
+            Book a 30-minute demo. We will show you exactly how Cureomax handles your clinic's follow-up workflow — built specifically for physiotherapy and orthopedic clinics.
+          </p>
+          <Link href="/book-demo" className="btn-gold" style={{ background: "white", color: "var(--teal)" }}>
+            Book a Demo for My Physio Clinic <ArrowRight size={15} />
+          </Link>
         </div>
       </section>
+
     </div>
   );
 }

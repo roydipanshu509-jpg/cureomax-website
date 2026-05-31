@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 import Link from "next/link";
 import { MessageSquare, Users, Calendar, FileText, Bell, CreditCard, BarChart3, TrendingUp } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "App Preview — Cureomax Dashboard",
-  description: "Preview the Cureomax clinic dashboard: WhatsApp inquiries, patient CRM, appointments, doctor copilot, follow-up queue, billing, and analytics.",
-};
 
 export default function AppPreviewPage() {
   return (

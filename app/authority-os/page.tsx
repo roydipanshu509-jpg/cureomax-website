@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 import Link from "next/link";
 import { CheckCircle, ArrowRight, Shield, Star, TrendingUp, BarChart3, FileText, Zap } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Authority OS — Digital Authority for Doctors | Cureomax",
-  description: "Cureomax Authority OS: Doctor Authority Score, media kit generator, compliance safety layer, and ethical brand partnership system for medical professionals.",
-};
 
 const modules = [
   {

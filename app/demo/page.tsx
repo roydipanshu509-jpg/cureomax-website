@@ -1,11 +1,7 @@
-import type { Metadata } from "next";
+"use client";
 import Link from "next/link";
 import { CheckCircle, MessageSquare, Calendar, FileText, Bell, CreditCard, BarChart3 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Product Demo — See Cureomax in Action",
-  description: "See how Cureomax helps a physio clinic convert a WhatsApp inquiry into a booked appointment, doctor note, follow-up, and analytics — step by step.",
-};
 
 const demoSteps = [
   {

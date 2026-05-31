@@ -7,16 +7,16 @@ interface LogoProps {
 }
 
 export default function Logo({ variant = "dark", size = "md", showWordmark = true }: LogoProps) {
-  const markColor = variant === "dark" ? "#C8A45D" : "#0D1B2A";
-  const textPrimary = variant === "dark" ? "#FAFAF7" : "#0D1B2A";
-  const textAccent = "#C8A45D";
+  const markStroke = "#C8A45D";
+  const wordmarkColor = variant === "dark" ? "#FAFAF8" : "#0D1B2A";
 
-  const sizes = { sm: 28, md: 34, lg: 44 };
-  const markSize = sizes[size];
-  const fontSize = size === "sm" ? "1.15rem" : size === "md" ? "1.4rem" : "1.8rem";
+  const markSizes = { sm: 26, md: 32, lg: 42 };
+  const fontSizes = { sm: "1.1rem", md: "1.35rem", lg: "1.75rem" };
+  const markSize = markSizes[size];
 
   return (
-    <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
+    <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.5rem", textDecoration: "none", userSelect: "none" }}>
+
       {/* ── Pulse Ring Mark ── */}
       <svg
         width={markSize}
@@ -25,51 +25,34 @@ export default function Logo({ variant = "dark", size = "md", showWordmark = tru
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
+        style={{ flexShrink: 0 }}
       >
-        {/* Outer ring */}
-        <circle cx="20" cy="20" r="17.5" stroke={markColor} strokeWidth="1.6" />
-
-        {/* ECG / pulse line — peaks at center forming a subtle cross */}
+        {/* Outer ring — slightly thicker */}
+        <circle cx="20" cy="20" r="17.5" stroke={markStroke} strokeWidth="1.5" opacity="0.9" />
+        {/* ECG pulse line */}
         <path
-          d="M4 20 H9 L12 26.5 L16.5 12 L19 20 L21 16.5 L23.5 20 H36"
-          stroke={markColor}
-          strokeWidth="1.8"
+          d="M4 20 H9.5 L12.5 26 L16.5 12.5 L19 20 L21 16.5 L23.5 20 H36"
+          stroke={markStroke}
+          strokeWidth="1.75"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
-
-        {/* Small cross dot at pulse peak — reinforces medical mark */}
-        <circle cx="19" cy="20" r="1.2" fill={markColor} />
       </svg>
 
-      {/* ── Wordmark ── */}
+      {/* ── Wordmark — single unified weight, no split color ── */}
       {showWordmark && (
-        <div style={{ display: "flex", alignItems: "baseline", gap: "0" }}>
-          <span
-            style={{
-              fontFamily: "var(--serif)",
-              fontSize,
-              fontWeight: 600,
-              color: textPrimary,
-              letterSpacing: "-0.02em",
-              lineHeight: 1,
-            }}
-          >
-            Cureo
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--serif)",
-              fontSize,
-              fontWeight: 600,
-              color: textAccent,
-              letterSpacing: "-0.02em",
-              lineHeight: 1,
-            }}
-          >
-            max
-          </span>
-        </div>
+        <span
+          style={{
+            fontFamily: "var(--serif)",
+            fontSize: fontSizes[size],
+            fontWeight: 600,
+            color: wordmarkColor,
+            letterSpacing: "-0.015em",
+            lineHeight: 1,
+          }}
+        >
+          Cureomax
+        </span>
       )}
     </Link>
   );

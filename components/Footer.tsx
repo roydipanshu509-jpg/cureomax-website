@@ -1,266 +1,56 @@
 "use client";
 import Link from "next/link";
-import { MapPin, Mail, Phone } from "lucide-react";
+import { MapPin, Mail } from "lucide-react";
 
-const productLinks = [
-  { href: "/product", label: "Product" },
-  { href: "/demo", label: "Demo" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/app-preview", label: "App Preview" },
-];
-
-const specialtyLinks = [
-  { href: "/physio-ortho-clinics", label: "Physio & Ortho Clinics" },
-  { href: "/women-health-clinics", label: "Women's Health Clinics" },
-];
-
-const legalLinks = [
-  { href: "/privacy-policy", label: "Privacy Policy" },
-  { href: "/terms", label: "Terms of Service" },
-  { href: "/disclaimer", label: "Disclaimer" },
-  { href: "/data-security", label: "Data Security" },
+const cols = [
+  { heading: "Clinic OS", links: [{ href: "/clinic-os", label: "Overview" }, { href: "/demo", label: "Demo" }, { href: "/pricing", label: "Pricing" }, { href: "/book-demo", label: "Book Demo" }] },
+  { heading: "Authority OS", links: [{ href: "/authority-os", label: "Overview" }, { href: "/authority-os#modules", label: "Modules" }, { href: "/book-demo", label: "Get Early Access" }] },
+  { heading: "Brand Connect", links: [{ href: "/brand-connect", label: "Overview" }, { href: "/brand-connect", label: "Use Cases" }, { href: "/book-demo", label: "Brand Access" }] },
+  { heading: "Company", links: [{ href: "/book-demo", label: "Strategy Call" }, { href: "/contact", label: "Contact" }, { href: "/privacy-policy", label: "Privacy Policy" }, { href: "/terms", label: "Terms" }, { href: "/disclaimer", label: "Disclaimer" }, { href: "/data-security", label: "Data Security" }] },
 ];
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        background: "#0F2A1D",
-        color: "rgba(247,241,229,0.75)",
-        padding: "4rem 0 0",
-        borderTop: "1px solid rgba(200,169,106,0.15)",
-        fontFamily: "var(--font-body)",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1280px",
-          margin: "0 auto",
-          padding: "0 1.5rem",
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-          gap: "3rem",
-        }}
-      >
+    <footer style={{ background: "#0A0905", borderTop: "1px solid rgba(200,164,93,0.1)", padding: "4rem 0 0", fontFamily: "var(--sans)" }}>
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 1.5rem", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "3rem" }}>
         {/* Brand */}
         <div>
-          <div
-            style={{
-              fontFamily: "var(--font-serif)",
-              fontSize: "1.6rem",
-              fontWeight: 600,
-              marginBottom: "0.75rem",
-            }}
-          >
-            <span style={{ color: "#F7F1E5" }}>Cureo</span>
-            <span style={{ color: "#C8A96A" }}>max</span>
+          <div style={{ marginBottom: "0.75rem" }}>
+            <span style={{ fontFamily: "var(--serif)", fontSize: "1.5rem", fontWeight: 600, color: "#FAFAF7" }}>Cureo</span>
+            <span style={{ fontFamily: "var(--serif)", fontSize: "1.5rem", fontWeight: 600, color: "#C8A45D" }}>max</span>
           </div>
-          <p
-            style={{
-              fontSize: "0.88rem",
-              lineHeight: 1.7,
-              maxWidth: "220px",
-              color: "rgba(247,241,229,0.6)",
-            }}
-          >
-            AI Clinic Assistant for modern Indian clinics. Built to save
-            doctor time and recover lost patients.
-          </p>
-          <div
-            style={{
-              marginTop: "1.5rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.6rem",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                fontSize: "0.82rem",
-                color: "rgba(247,241,229,0.55)",
-              }}
-            >
-              <MapPin size={13} color="#C8A96A" />
-              Noida, Delhi NCR, India
+          <p style={{ fontSize: "0.82rem", color: "var(--trust-gray)", lineHeight: 1.7, maxWidth: 200, marginBottom: "1.5rem" }}>AI Growth Systems for Healthcare Trust.</p>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.78rem", color: "rgba(141,138,128,0.7)" }}>
+              <MapPin size={12} color="#C8A45D" /> Noida, Delhi NCR, India
             </div>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                fontSize: "0.82rem",
-                color: "rgba(247,241,229,0.55)",
-              }}
-            >
-              <Mail size={13} color="#C8A96A" />
-              hello@cureomax.com
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.78rem", color: "rgba(141,138,128,0.7)" }}>
+              <Mail size={12} color="#C8A45D" /> hello@cureomax.com
             </div>
           </div>
         </div>
-
-        {/* Product */}
-        <div>
-          <h4
-            style={{
-              color: "#C8A96A",
-              fontSize: "0.72rem",
-              fontWeight: 600,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: "1.25rem",
-              fontFamily: "var(--font-body)",
-            }}
-          >
-            Product
-          </h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {productLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                style={{
-                  color: "rgba(247,241,229,0.6)",
-                  textDecoration: "none",
-                  fontSize: "0.88rem",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#F7F1E5")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "rgba(247,241,229,0.6)")
-                }
-              >
-                {l.label}
-              </Link>
-            ))}
+        {/* Columns */}
+        {cols.map((col) => (
+          <div key={col.heading}>
+            <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#C8A45D", marginBottom: "1rem" }}>{col.heading}</p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+              {col.links.map((l) => (
+                <Link key={l.label} href={l.href} style={{ color: "rgba(141,138,128,0.8)", textDecoration: "none", fontSize: "0.86rem", transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "#FAFAF7")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(141,138,128,0.8)")}>
+                  {l.label}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-
-        {/* Specialties */}
-        <div>
-          <h4
-            style={{
-              color: "#C8A96A",
-              fontSize: "0.72rem",
-              fontWeight: 600,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: "1.25rem",
-              fontFamily: "var(--font-body)",
-            }}
-          >
-            Specialties
-          </h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {specialtyLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                style={{
-                  color: "rgba(247,241,229,0.6)",
-                  textDecoration: "none",
-                  fontSize: "0.88rem",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#F7F1E5")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "rgba(247,241,229,0.6)")
-                }
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Legal */}
-        <div>
-          <h4
-            style={{
-              color: "#C8A96A",
-              fontSize: "0.72rem",
-              fontWeight: 600,
-              letterSpacing: "0.12em",
-              textTransform: "uppercase",
-              marginBottom: "1.25rem",
-              fontFamily: "var(--font-body)",
-            }}
-          >
-            Legal
-          </h4>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {legalLinks.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                style={{
-                  color: "rgba(247,241,229,0.6)",
-                  textDecoration: "none",
-                  fontSize: "0.88rem",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "#F7F1E5")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "rgba(247,241,229,0.6)")
-                }
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
-
-      {/* Safety banner */}
-      <div
-        style={{
-          maxWidth: "1280px",
-          margin: "3rem auto 0",
-          padding: "0 1.5rem",
-        }}
-      >
-        <div
-          style={{
-            borderTop: "1px solid rgba(200,169,106,0.15)",
-            paddingTop: "1.5rem",
-            paddingBottom: "1.5rem",
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.75rem",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "0.78rem",
-              color: "rgba(247,241,229,0.4)",
-              lineHeight: 1.7,
-              maxWidth: "800px",
-            }}
-          >
-            <strong style={{ color: "rgba(247,241,229,0.6)" }}>
-              Medical Disclaimer:{" "}
-            </strong>
-            Cureomax is a clinic workflow and AI-assistance platform. Cureomax
-            does not provide medical advice, diagnosis, or treatment. All
-            AI-generated content must be reviewed and approved by a qualified
-            healthcare professional before use. AI assists. Doctors decide.
-          </p>
-          <p
-            style={{
-              fontSize: "0.78rem",
-              color: "rgba(247,241,229,0.35)",
-            }}
-          >
-            © {new Date().getFullYear()} Cureomax. All rights reserved. Made
-            with care in Noida, India.
+      {/* Bottom bar */}
+      <div style={{ maxWidth: 1280, margin: "3rem auto 0", padding: "0 1.5rem" }}>
+        <div style={{ borderTop: "1px solid rgba(200,164,93,0.08)", padding: "1.5rem 0", display: "flex", flexWrap: "wrap", gap: "1rem", justifyContent: "space-between", alignItems: "center" }}>
+          <p style={{ fontSize: "0.75rem", color: "rgba(141,138,128,0.5)" }}>© {new Date().getFullYear()} Cureomax. All rights reserved.</p>
+          <p style={{ fontSize: "0.75rem", color: "rgba(141,138,128,0.4)", maxWidth: 600, lineHeight: 1.6 }}>
+            Cureomax is a clinic workflow and AI-assistance platform. It does not provide medical advice, diagnosis, or treatment. All AI-generated content requires doctor review. AI assists. Doctors decide.
           </p>
         </div>
       </div>

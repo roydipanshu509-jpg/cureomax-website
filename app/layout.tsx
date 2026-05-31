@@ -5,58 +5,19 @@ import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export const metadata: Metadata = {
-  title: {
-    default: "Cureomax | AI Clinic Assistant for Indian Clinics",
-    template: "%s | Cureomax",
-  },
-  description:
-    "Cureomax helps Indian clinics convert WhatsApp inquiries, automate follow-ups, draft doctor-approved notes, manage billing, and recover lost revenue.",
-  keywords: [
-    "AI clinic assistant India",
-    "clinic CRM India",
-    "WhatsApp clinic automation",
-    "doctor notes AI India",
-    "clinic follow-up software",
-    "physiotherapy clinic software India",
-    "orthopedic clinic CRM",
-    "AI receptionist for clinics",
-    "patient follow-up automation",
-    "clinic billing and analytics",
-  ],
-  authors: [{ name: "Cureomax" }],
-  creator: "Cureomax",
-  publisher: "Cureomax",
+  title: { default: "Cureomax | AI Growth Systems for Healthcare Trust", template: "%s | Cureomax" },
+  description: "Cureomax builds AI-powered growth, automation, and digital authority systems for doctors, clinics, and healthcare brands.",
+  keywords: ["AI clinic assistant India", "doctor digital authority", "healthcare brand collaboration", "clinic CRM India", "WhatsApp clinic automation", "doctor media kit", "healthcare compliance platform"],
   openGraph: {
-    type: "website",
-    locale: "en_IN",
-    url: "https://cureomax.com",
-    siteName: "Cureomax",
-    title: "Cureomax | AI Clinic Assistant for Indian Clinics",
-    description:
-      "Convert WhatsApp inquiries, automate patient follow-ups, draft doctor-approved notes, and manage billing — from one elegant dashboard.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Cureomax — AI Clinic Assistant",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Cureomax | AI Clinic Assistant for Indian Clinics",
-    description:
-      "AI Clinic Assistant that helps Indian clinics stop losing patients.",
-    images: ["/og-image.png"],
+    type: "website", locale: "en_IN", url: "https://cureomax.com", siteName: "Cureomax",
+    title: "Cureomax | AI Growth Systems for Healthcare Trust",
+    description: "AI-powered growth, automation, and digital authority systems for doctors, clinics, and healthcare brands in India.",
   },
   robots: { index: true, follow: true },
   metadataBase: new URL("https://cureomax.com"),
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>

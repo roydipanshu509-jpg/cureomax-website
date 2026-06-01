@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
     const TO_EMAIL = process.env.RESEND_TO_EMAIL || "cureomax@gmail.com";
-    const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "demos@cureomax.com";
+    const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
     if (!RESEND_API_KEY) {
       // Fallback: log and succeed without email (dev mode)

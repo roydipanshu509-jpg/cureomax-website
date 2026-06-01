@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    const TO_EMAIL = process.env.RESEND_TO_EMAIL || "hello@cureomax.com";
+    const TO_EMAIL = process.env.RESEND_TO_EMAIL || "cureomax@gmail.com";
     const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "demos@cureomax.com";
 
     if (!RESEND_API_KEY) {

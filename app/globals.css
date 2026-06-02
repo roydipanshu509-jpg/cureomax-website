@@ -110,25 +110,28 @@ img, svg { display: block; }
 }
 .eyebrow-teal { color: var(--teal-bright); }
 
-/* ── Buttons ── */
+/* ── Buttons — Taction-style pill shape ── */
 .btn-gold {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: var(--gold); color: var(--navy);
   font-family: var(--sans); font-weight: 700;
   font-size: 0.87rem; letter-spacing: 0.03em;
-  padding: 0.875rem 2rem; border-radius: 3px;
+  padding: 0.75rem 1.75rem; border-radius: 9999px;
   border: none; cursor: pointer; text-decoration: none;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   white-space: nowrap;
 }
-.btn-gold:hover { background: var(--gold-bright); transform: translateY(-1px); }
+.btn-gold:hover {
+  background: var(--gold-bright); transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(200,164,93,0.35);
+}
 
 .btn-outline-gold {
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: transparent; color: var(--gold);
   font-family: var(--sans); font-weight: 600;
   font-size: 0.87rem; letter-spacing: 0.03em;
-  padding: 0.875rem 2rem; border-radius: 3px;
+  padding: 0.75rem 1.75rem; border-radius: 9999px;
   border: 1px solid rgba(200,164,93,0.45);
   cursor: pointer; text-decoration: none;
   transition: all 0.2s;
@@ -140,7 +143,7 @@ img, svg { display: block; }
   background: transparent; color: var(--navy);
   font-family: var(--sans); font-weight: 600;
   font-size: 0.87rem; letter-spacing: 0.03em;
-  padding: 0.875rem 2rem; border-radius: 3px;
+  padding: 0.75rem 1.75rem; border-radius: 9999px;
   border: 1px solid rgba(13,27,42,0.22);
   cursor: pointer; text-decoration: none;
   transition: all 0.2s;
@@ -152,11 +155,11 @@ img, svg { display: block; }
   background: var(--teal); color: var(--white);
   font-family: var(--sans); font-weight: 700;
   font-size: 0.87rem; letter-spacing: 0.03em;
-  padding: 0.875rem 2rem; border-radius: 3px;
+  padding: 0.75rem 1.75rem; border-radius: 9999px;
   border: none; cursor: pointer; text-decoration: none;
-  transition: background 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
 }
-.btn-teal:hover { background: var(--teal-bright); }
+.btn-teal:hover { background: var(--teal-bright); box-shadow: 0 4px 16px rgba(10,112,117,0.3); }
 
 /* ── Cards ── */
 .card-navy {
@@ -332,3 +335,191 @@ select.form-input option { background: var(--navy-mid); color: var(--white); }
   display: none;
 }
 @media (max-width: 767px) { .sticky-mobile-cta { display: flex; gap: 0.75rem; } }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TACTION-INSPIRED PATTERNS — Added to Cureomax design system
+   Architecture: chip tags, section labels, dot textures, CTA gradients,
+   category dots, brand bar, glass surfaces, skeleton, gradient text.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Chip / Pill tag (Taction feature chip with dot indicator) ── */
+.chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.4rem 0.9rem; border-radius: 9999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--sans); font-size: 0.8rem; font-weight: 500;
+  color: rgba(250,250,248,0.6);
+  cursor: default; transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap; user-select: none;
+}
+.chip:hover { border-color: rgba(255,255,255,0.2); color: rgba(250,250,248,0.85); }
+.chip.active {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.2);
+  color: rgba(250,250,248,0.9);
+}
+.chip-dot {
+  width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+.chip-dot-gold   { background: var(--gold); }
+.chip-dot-teal   { background: var(--teal); }
+.chip-dot-empty  { border: 1.5px solid rgba(255,255,255,0.25); background: transparent; }
+
+/* ── Section label with dot (Taction category header style) ── */
+/* Usage: <p class="section-label">Why Cureomax</p> above every h2 */
+.section-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold);
+}
+.section-label::before {
+  content: ''; display: inline-block;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold); flex-shrink: 0;
+}
+.section-label-teal { color: var(--teal-bright); }
+.section-label-teal::before { background: var(--teal-bright); }
+
+/* ── Dot texture backgrounds (Taction signature pattern) ── */
+.dot-texture {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.dot-texture-gold {
+  background-image: radial-gradient(circle, rgba(200,164,93,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.dot-texture-sm {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ── CTA gradient section (Taction's most distinctive pattern) ── */
+.cta-gradient {
+  background: linear-gradient(135deg, rgba(10,112,117,0.32) 0%, rgba(13,27,42,0.97) 52%, rgba(21,36,50,1) 100%);
+}
+.cta-gradient-gold {
+  background: linear-gradient(135deg, rgba(200,164,93,0.14) 0%, rgba(13,27,42,0.97) 48%, rgba(10,112,117,0.12) 100%);
+}
+
+/* ── Top/bottom border glows for CTA sections ── */
+.border-glow-top {
+  position: relative;
+}
+.border-glow-top::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(10,112,117,0.5), rgba(200,164,93,0.4), rgba(10,112,117,0.5), transparent);
+  pointer-events: none;
+}
+.border-glow-bottom::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,164,93,0.3), transparent);
+  pointer-events: none;
+}
+
+/* ── Brand accent bar (Taction-style 3px bottom line on footer) ── */
+.brand-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal) 0%, var(--gold) 50%, var(--teal) 100%);
+}
+
+/* ── Footer category dot (Taction column header dot) ── */
+.footer-col-label {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-family: var(--sans); font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(141,138,128,0.7); margin-bottom: 1rem;
+}
+.footer-col-label::before {
+  content: ''; display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gold);
+}
+.footer-col-label.teal::before { background: var(--teal); }
+
+/* ── Frosted glass surface ── */
+.glass {
+  background: rgba(13,27,42,0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(200,164,93,0.1);
+}
+.glass-light {
+  background: rgba(247,243,236,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(13,27,42,0.1);
+}
+
+/* ── Gradient text ── */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4B575 0%, #C8A45D 50%, #B08A3E 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-teal {
+  background: linear-gradient(135deg, #5FC0C2 0%, #0A7075 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-gradient-brand {
+  background: linear-gradient(135deg, #C8A45D 0%, #0E8E94 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Skeleton / shimmer loader ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.04) 25%,
+    rgba(255,255,255,0.08) 50%,
+    rgba(255,255,255,0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite linear;
+  border-radius: 4px;
+}
+
+/* ── Eyebrow chip (hero section — live status pill) ── */
+.eyebrow-chip {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.35rem 0.85rem; border-radius: 9999px;
+  background: rgba(10,112,117,0.12);
+  border: 1px solid rgba(10,112,117,0.3);
+  font-family: var(--sans); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal-bright);
+}
+.eyebrow-chip .live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal-bright);
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* ── Radial hero glow backgrounds ── */
+.hero-glow {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 40%, rgba(10,112,117,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 78% 22%, rgba(200,164,93,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 55% at 60% 80%, rgba(10,112,117,0.06) 0%, transparent 70%);
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,164,93,0.4); }
+
+/* ── Selection ── */
+::selection { background: rgba(200,164,93,0.22); color: #FAFAF8; }

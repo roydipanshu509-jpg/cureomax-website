@@ -1,77 +1,136 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import FloatingWhatsApp from "@/components/FloatingWhatsApp";
-import Analytics from "@/components/Analytics";
-import StickyMobileCTA from "@/components/StickyMobileCTA";
+import type { Metadata } from 'next'
+import { Cormorant_Garamond, DM_Serif_Display, JetBrains_Mono } from 'next/font/google'
+import localFont from 'next/font/local'
+import Script from 'next/script'
+import './globals.css'
+import Nav from '@/components/layout/Nav'
+import Footer from '@/components/layout/Footer'
+import VoiceWidget from '@/components/layout/VoiceWidget'
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-display',
+  display: 'swap',
+})
+
+const dmSerif = DM_Serif_Display({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-heading',
+  display: 'swap',
+})
+
+const jetbrains = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+const cabinet = localFont({
+  src: '../public/fonts/CabinetGrotesk-Variable.woff2',
+  variable: '--font-body',
+  display: 'swap',
+  fallback: ['system-ui', 'sans-serif'],
+})
 
 export const metadata: Metadata = {
-  title: { default: "Cureomax — AI Clinic OS for Modern Indian Healthcare", template: "%s | Cureomax" },
-  description: "Cureomax helps clinics automate patient intake, doctor notes, prescription drafts, follow-ups, billing, and CRM — without replacing clinical judgment.",
-  keywords: ["AI clinic software India", "clinic CRM India", "WhatsApp clinic automation", "AI medical scribe India", "physiotherapy clinic software", "doctor notes automation India", "clinic follow-up software"],
+  title: {
+    default: 'Cureomax | AI Growth Platform for Indian Specialty Clinics',
+    template: '%s | Cureomax',
+  },
+  description:
+    'Clinic OS by Cureomax gives physiotherapy and orthopedic clinics in India AI-powered appointment management, automated patient follow-ups, and revenue growth dashboards.',
+  keywords: [
+    'AI clinic management India',
+    'physiotherapy clinic software',
+    'orthopedic practice AI',
+    'Clinic OS',
+    'Cureomax',
+    'no-show prevention clinic India',
+    'patient follow-up automation India',
+  ],
+  authors: [{ name: 'Roy', url: 'https://cureomax.com/about' }],
   openGraph: {
-    type: "website", locale: "en_IN", url: "https://cureomax.com",
-    siteName: "Cureomax",
-    title: "Cureomax — AI Clinic OS for Modern Indian Healthcare",
-    description: "Automate notes, follow-ups, billing, and CRM — built for Indian specialty clinics.",
+    title: 'Cureomax — AI Growth Platform for Indian Specialty Clinics',
+    description:
+      'The AI platform that grows your clinic. Built for physiotherapy and orthopedic practices in Delhi NCR, India.',
+    url: 'https://cureomax.com',
+    siteName: 'Cureomax',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630 }],
+    locale: 'en_IN',
+    type: 'website',
   },
-  twitter: { card: "summary_large_image" },
-  robots: { index: true, follow: true },
-  metadataBase: new URL("https://cureomax.com"),
-  icons: {
-    icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],
-    apple: "/apple-touch-icon.svg",
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Cureomax — AI Growth Platform for Indian Specialty Clinics',
+    description: 'Built for physiotherapy and orthopedic practices in India.',
+    images: ['/images/og-image.jpg'],
   },
-  manifest: "/site.webmanifest",
-  other: {
-    "theme-color": "#0D1B2A",
+  alternates: { canonical: 'https://cureomax.com' },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
   },
-};
+  metadataBase: new URL('https://cureomax.com'),
+}
 
 const structuredData = {
-  "@context": "https://schema.org",
-  "@graph": [
+  '@context': 'https://schema.org',
+  '@graph': [
     {
-      "@type": "Organization",
-      "@id": "https://cureomax.com/#org",
-      name: "Cureomax",
-      url: "https://cureomax.com",
-      logo: "https://cureomax.com/favicon.svg",
-      description: "AI Clinic OS for Modern Indian Healthcare",
-      address: { "@type": "PostalAddress", addressLocality: "Noida", addressRegion: "Uttar Pradesh", addressCountry: "IN" },
-      contactPoint: { "@type": "ContactPoint", email: "hello@cureomax.com", contactType: "customer support" },
+      '@type': 'Organization',
+      '@id': 'https://cureomax.com/#organization',
+      name: 'Cureomax',
+      url: 'https://cureomax.com',
+      description: 'AI healthcare growth platform for Indian physiotherapy and orthopedic clinics',
+      foundingDate: '2025',
+      founders: [{ '@type': 'Person', name: 'Roy', jobTitle: 'CEO & Founder' }],
+      areaServed: { '@type': 'Country', name: 'India' },
+      knowsAbout: [
+        'AI clinic management',
+        'Physiotherapy clinic software',
+        'Orthopedic practice management',
+        'Healthcare AI India',
+        'Patient no-show prevention',
+        'Clinic growth automation',
+      ],
     },
     {
-      "@type": "SoftwareApplication",
-      "@id": "https://cureomax.com/#app",
-      name: "Cureomax Clinic OS",
-      applicationCategory: "HealthcareApplication",
-      operatingSystem: "Web",
-      url: "https://cureomax.com",
-      description: "AI-powered clinic operating system for Indian specialty clinics. Automates patient notes, follow-ups, billing, and CRM.",
-      offers: { "@type": "Offer", price: "4999", priceCurrency: "INR", priceValidUntil: "2026-12-31" },
+      '@type': 'SoftwareApplication',
+      name: 'Clinic OS',
+      applicationCategory: 'HealthcareApplication',
+      operatingSystem: 'Web',
+      description: 'AI-powered management system for Indian specialty clinics',
+      offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
     },
   ],
-};
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${dmSerif.variable} ${jetbrains.variable} ${cabinet.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body>
-        <Analytics />
-        <Navbar />
+      <body className="bg-[var(--warm-white)] text-[var(--text-primary)] font-body antialiased">
+        <Nav />
         <main>{children}</main>
-        <StickyMobileCTA />
         <Footer />
-        <FloatingWhatsApp />
+        <VoiceWidget />
+        <Script
+          src="https://elevenlabs.io/convai-widget/index.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
-  );
+  )
 }
